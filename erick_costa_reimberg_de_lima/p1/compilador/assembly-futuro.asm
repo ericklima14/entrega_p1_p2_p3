@@ -1,0 +1,93 @@
+; Assembly gerado do programa "u"
+
+.DATA
+A DB ?
+B DB 5
+RES DB ?
+TEMP_0 DB ? ; valor usado para operacoes
+TEMP_1 DB ? ; valor usado para operacoes
+TEMP_2 DB ? ; guarda o endereco de retorno
+TEMP_3 DB ? ; guarda o valor temporariamente
+Y DB 1
+Z DB -1
+ZERO DB 0
+
+.CODE
+.ORG 0
+LDA TEMP_0
+ADD 7
+STA TEMP_0
+LDA TEMP_1
+ADD 8
+STA TEMP_1
+LDA TEMP_0
+SUB TEMP_1
+STA A
+LDA ZERO
+STA TEMP_1
+LDA TEMP_1
+ADD 9
+STA TEMP_1
+ADD TEMP_0
+STA A
+LDA ZERO
+STA TEMP_0
+STA TEMP_1
+LDA A
+ADD B
+STA TEMP_0
+LDA B
+STA TEMP_1
+LDA TEMP_2
+ADD (linhas + 2)
+JMP (inicio MUL)
+STA RES
+LDA ZERO
+STA TEMP_0
+STA TEMP_1
+STA TEMP_3
+JMP TEMP_2
+STA TEMP_0
+LDA B
+STA TEMP_1
+LDA TEMP_2
+ADD (linhas + 3)
+STA TEMP_2
+JMP (inicio MUL)
+STA RES
+LDA ZERO
+STA TEMP_0
+STA TEMP_1
+STA TEMP_3
+JMP TEMP_2
+HLT
+
+; offset corresponde ao inicio da MUL
+LDA TEMP_0
+JN offset + 4 
+JZ offset + 18
+JMP offset + 12
+NOT
+ADD Y
+STA TEMP_0
+LDA TEMP_1
+NOT
+ADD Y
+STA TEMP_1
+JMP 0
+ADD Z
+STA TEMP_0
+LDA TEMP_3
+ADD TEMP_1
+STA TEMP_3
+JMP offset 
+LDA TEMP_3
+JMP TEMP_2
+
+; codigo para subtracao
+LDA TEMP_0
+NOT
+ADD Y
+ADD TEMP_1
+STA TEMP_0
+JMP TEMP_2
